@@ -1,0 +1,11 @@
+# Local database
+settlr.db
+settlr.db-shm
+settlr.db-wal
+
+# Maven build output
+target/
+
+# IDE files
+.idea/
+.vscode/
