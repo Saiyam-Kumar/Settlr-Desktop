@@ -1,0 +1,101 @@
+/* Dark theme: loaded after settlr.css, so it only overrides the colour variables. */
+.root {
+    -fx-primary: #5B7CFA;
+    -fx-primary-dark: #4A6AE8;
+    -fx-primary-soft: #1E2A52;
+    -fx-ink: #E6EAF5;
+    -fx-muted: #93A0BC;
+    -fx-line: #25304A;
+    -fx-surface: #0E1424;
+    -fx-card: #161E33;
+    -fx-field: #111A2E;
+    -fx-field-line: #2D3A58;
+    -fx-hover: #1C2640;
+    -fx-chip: #222C47;
+    -fx-chip-text: #C3CCE0;
+    -fx-track: #25304A;
+    -fx-green: #32D583;
+    -fx-red: #F97066;
+    -fx-faint-focus-color: rgba(91, 124, 250, 0.18);
+}
+
+.sidebar {
+    -fx-background-color: #080E1D;
+}
+
+.btn-danger {
+    -fx-border-color: #7A271A;
+    -fx-text-fill: #F97066;
+}
+
+.toast {
+    -fx-background-color: #25304A;
+}
+
+.scroll-bar .thumb {
+    -fx-background-color: #34415F;
+}
+
+/* dropdown lists */
+.combo-box-popup>.list-view {
+    -fx-background-color: #161E33;
+    -fx-border-color: #2D3A58;
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: #E6EAF5;
+}
+
+.combo-box-popup .list-cell:filled:hover {
+    -fx-background-color: #25304A;
+}
+
+.combo-box-popup .list-cell:filled:selected {
+    -fx-background-color: #5B7CFA;
+    -fx-text-fill: white;
+}
+
+/* date picker popup */
+.date-picker-popup {
+    -fx-background-color: #161E33;
+    -fx-border-color: #2D3A58;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #1C2640;
+}
+
+.date-picker-popup .label {
+    -fx-text-fill: #E6EAF5;
+}
+
+.date-picker-popup .spinner .button {
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup .day-name-cell,
+.date-picker-popup .week-number-cell {
+    -fx-text-fill: #93A0BC;
+}
+
+.date-picker-popup .day-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: #E6EAF5;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #25304A;
+}
+
+.date-picker-popup .day-cell:selected {
+    -fx-background-color: #5B7CFA;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .day-cell:today {
+    -fx-border-color: #5B7CFA;
+}
+
+.date-picker-popup .day-cell:empty {
+    -fx-background-color: transparent;
+}

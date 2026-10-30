@@ -13,6 +13,7 @@
         <maven.compiler.release>21</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <javafx.version>21.0.3</javafx.version>
+        <junit.version>5.10.2</junit.version>
     </properties>
 
     <dependencies>
@@ -27,6 +28,13 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.45.3.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -37,6 +45,14 @@
                 <version>3.13.0</version>
             </plugin>
 
+            <!-- mvn test -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+
+            <!-- mvn javafx:run -->
             <plugin>
                 <groupId>org.openjfx</groupId>
                 <artifactId>javafx-maven-plugin</artifactId>
@@ -44,12 +60,31 @@
                 <configuration>
                     <mainClass>com.settlr.MainApp</mainClass>
                     <options>
-                        <!-- Silences the SQLite "restricted method" warning -->
                         <option>--enable-native-access=ALL-UNNAMED</option>
                         <!-- Fixes blurry / "trembling" text -->
                         <option>-Dprism.lcdtext=false</option>
                     </options>
                 </configuration>
+            </plugin>
+
+            <!-- copies every dependency to target/libs, used by scripts/package.sh -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.6.1</version>
+                <executions>
+                    <execution>
+                        <id>copy-libs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <includeScope>runtime</includeScope>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
