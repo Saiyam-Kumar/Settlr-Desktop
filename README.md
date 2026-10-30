@@ -47,32 +47,32 @@ Settlr Desktop is a standalone application. There is no account, no server and n
 
 ---
 
-## Screenshots
+## 📸 Screenshots
 
 ### Dashboard
 Spending overview, budget watch, recent expenses, and monthly spending chart.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.39.39%20AM.png" alt="Settlr Dashboard" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.39.39%E2%80%AFAM.png" alt="Settlr Dashboard" width="100%">
 
 ### Personal Expenses
 Add expenses, search, filter by month, category or date range, edit or delete expenses, and export to CSV.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.39.49%20AM.png" alt="Personal Expenses" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.39.49%E2%80%AFAM.png" alt="Personal Expenses" width="100%">
 
 ### Trip Details — Goa Trip
 Manage members, shared expenses, trip summaries, payer information, and category-wise spending.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.01%20AM.png" alt="Goa Trip Details" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.01%E2%80%AFAM.png" alt="Goa Trip Details" width="100%">
 
 ### Settlements
 View member balances, outstanding transfers, suggested payments, and completed settlements.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.32%20AM.png" alt="Settlements" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.32%E2%80%AFAM.png" alt="Settlements" width="100%">
 
 ### Budgets — Dark Mode
 Set monthly limits, monitor budget progress, and manage recurring expenses.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.49%20AM.png" alt="Budgets" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.49%E2%80%AFAM.png" alt="Budgets" width="100%">
 
 ### Analytics — Dark Mode
 Explore category-wise spending, pie charts, monthly trends, and financial summaries.
@@ -83,8 +83,6 @@ Explore category-wise spending, pie charts, monthly trends, and financial summar
 Manage your profile, appearance preferences, local database backup, and application information.
 
 <img src="docs/Screenshot%202026-10-30%20at%2010.42.03%E2%80%AFAM.png" alt="Settings" width="100%">
-
----
 
 ---
 
