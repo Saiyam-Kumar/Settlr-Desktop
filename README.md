@@ -47,7 +47,7 @@ Settlr Desktop is a standalone application. There is no account, no server and n
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
 ### Dashboard
 Spending overview, budget watch, recent expenses, and monthly spending chart.
