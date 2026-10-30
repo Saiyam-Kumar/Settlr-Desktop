@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.settlr.db.Database;
 import com.settlr.db.Extras;
+import com.settlr.db.GroupExpenses;
 import com.settlr.ui.AnalyticsPage;
 import com.settlr.ui.BudgetsPage;
 import com.settlr.ui.DashboardPage;
@@ -137,6 +138,12 @@ public class MainApp extends Application implements Nav {
     public void openTrip(Group group) {
         resetContent("My Trips");
         trips.renderDetail(content, group);
+    }
+
+    @Override
+    public void expenseForm(Group group, GroupExpenses.Expense existing) {
+        resetContent("My Trips");
+        trips.renderExpenseForm(content, group, existing);
     }
 
     @Override

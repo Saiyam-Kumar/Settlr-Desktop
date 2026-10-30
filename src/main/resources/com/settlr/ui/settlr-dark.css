@@ -38,19 +38,27 @@
 
 /* dropdown lists */
 .combo-box-popup>.list-view {
+    -fx-control-inner-background: #161E33;
     -fx-background-color: #161E33;
     -fx-border-color: #2D3A58;
 }
 
-.combo-box-popup .list-cell {
+/* the cells paint their own (white) background, so they need to be dark as well */
+.combo-box-popup .list-cell,
+.combo-box-popup .list-cell:odd,
+.combo-box-popup .list-cell:even,
+.combo-box-popup .list-cell:empty {
+    -fx-background-color: #161E33;
     -fx-text-fill: #E6EAF5;
 }
 
 .combo-box-popup .list-cell:filled:hover {
     -fx-background-color: #25304A;
+    -fx-text-fill: #E6EAF5;
 }
 
-.combo-box-popup .list-cell:filled:selected {
+.combo-box-popup .list-cell:filled:selected,
+.combo-box-popup .list-cell:filled:selected:hover {
     -fx-background-color: #5B7CFA;
     -fx-text-fill: white;
 }

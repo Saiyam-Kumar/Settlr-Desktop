@@ -211,7 +211,7 @@ public final class TripsPage {
 
         // ---- expenses
         Button record = primaryButton("＋  Record expense");
-        record.setOnAction(e -> expenseDialog(group, null));
+        record.setOnAction(e -> nav.expenseForm(group, null));
         HBox expHeader = new HBox(sectionTitle("Expenses"), spacer(), record);
         expHeader.setAlignment(Pos.CENTER_LEFT);
         content.getChildren().add(expHeader);
@@ -231,7 +231,7 @@ public final class TripsPage {
                 price.getStyleClass().add("amount");
 
                 Button edit = smallButton("Edit");
-                edit.setOnAction(e -> expenseDialog(group, ex));
+                edit.setOnAction(e -> nav.expenseForm(group, ex));
                 Button del = dangerSmallButton("Delete");
                 del.setOnAction(e -> {
                     if (confirm("Delete expense", "Delete \"" + ex.name() + "\"? Its shares will be removed too.")) {
@@ -300,18 +300,24 @@ public final class TripsPage {
         }
     }
 
-    // ================= EXPENSE DIALOG (add / edit, any split) =================
+    // ================= EXPENSE FORM (same window; add / edit, any split) =================
 
     private record Row(Member member, CheckBox check, TextField input) {
     }
 
-    private void expenseDialog(Group group, Expense existing) {
+    public void renderExpenseForm(VBox content, Group group, Expense existing) {
         List<Member> members = Database.getGroupMembers(group.getId());
+        boolean editing = existing != null;
+
+        Button back = secondaryButton("←  Back to trip");
+        back.setOnAction(e -> nav.openTrip(group));
+        pageHeader(content, editing ? "Edit expense" : "Record expense",
+                (editing ? "Update the shared cost for " : "Split a shared cost for ") + group.getName(), back);
+
         if (members.isEmpty()) {
-            message("Add members first", "Add at least one member before recording an expense.");
+            content.getChildren().add(emptyMessage("Add at least one member to this trip before recording an expense."));
             return;
         }
-        boolean editing = existing != null;
 
         Map<Integer, Double> oldShares = new HashMap<>();
         if (editing) {
@@ -325,13 +331,6 @@ public final class TripsPage {
             double max = oldShares.values().stream().mapToDouble(Double::doubleValue).max().orElse(0);
             oldWasEqual = max - min <= 0.011;
         }
-
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.setTitle(editing ? "Edit expense" : "Record expense");
-        dialog.setHeaderText((editing ? "Update the shared cost for " : "Split a shared cost for ") + group.getName());
-        ButtonType saveType = new ButtonType(editing ? "Save changes" : "Save expense", ButtonBar.ButtonData.OK_DONE);
-        dialog.getDialogPane().getButtonTypes().addAll(saveType, ButtonType.CANCEL);
-        style(dialog.getDialogPane());
 
         TextField name = new TextField(editing ? existing.name() : "");
         name.setPromptText("e.g. Hotel, dinner, taxi");
@@ -366,13 +365,12 @@ public final class TripsPage {
         // participants: checkbox + value box (value box depends on the split mode)
         List<Row> rows = new ArrayList<>();
         VBox participantBox = new VBox(8);
-        participantBox.setPadding(new Insets(6));
         for (Member m : members) {
             CheckBox check = new CheckBox(m.getName());
-            check.setMinWidth(130);
+            check.setMinWidth(160);
             check.setSelected(!editing || oldShares.containsKey(m.getId()));
             TextField input = new TextField();
-            input.setPrefWidth(120);
+            input.setPrefWidth(140);
             if (editing && !oldWasEqual && oldShares.containsKey(m.getId())) {
                 input.setText(String.valueOf(oldShares.get(m.getId())));
             }
@@ -381,9 +379,6 @@ public final class TripsPage {
             participantBox.getChildren().add(line);
             rows.add(new Row(m, check, input));
         }
-        ScrollPane participantScroll = new ScrollPane(participantBox);
-        participantScroll.setFitToWidth(true);
-        participantScroll.setPrefViewportHeight(170);
 
         Button toggleAll = smallButton("Select / clear all");
         toggleAll.setOnAction(e -> {
@@ -460,21 +455,11 @@ public final class TripsPage {
         }
         updatePreview.run();
 
-        GridPane form = formGrid();
-        form.addRow(0, new Label("Expense"), name);
-        form.addRow(1, new Label("Amount (₹)"), amount);
-        form.addRow(2, new Label("Category"), category);
-        form.addRow(3, new Label("Date"), date);
-        form.addRow(4, new Label("Paid by"), payer);
-        form.addRow(5, new Label("Split"), mode);
-        form.add(toggleAll, 0, 6);
-        form.add(participantScroll, 1, 6);
-        form.add(preview, 0, 7, 2, 1);
-        form.add(error, 0, 8, 2, 1);
-        dialog.getDialogPane().setContent(form);
+        Button save = primaryButton(editing ? "Save changes" : "Save expense");
+        Button cancel = secondaryButton("Cancel");
+        cancel.setOnAction(e -> nav.openTrip(group));
 
-        Button saveBtn = (Button) dialog.getDialogPane().lookupButton(saveType);
-        saveBtn.addEventFilter(ActionEvent.ACTION, ev -> {
+        save.setOnAction(e -> {
             String problem = null;
             if (name.getText().isBlank()) {
                 problem = "Enter an expense name.";
@@ -491,25 +476,41 @@ public final class TripsPage {
             }
             if (problem != null) {
                 error.setText(problem);
-                ev.consume();
+                return;
+            }
+
+            Map<Integer, Long> shares = compute.get();
+            long cents = Math.round(Money.parse(amount.getText()) * 100);
+            boolean ok = GroupExpenses.save(editing ? existing.id() : null, group.getId(), name.getText().trim(),
+                    cents, payer.getValue().getId(), date.getValue().toString(), category.getValue(), shares);
+            if (ok) {
+                nav.openTrip(group);
+                nav.toast(editing ? "Expense updated" : "Expense saved");
+            } else {
+                error.setText("Could not save the expense. Please check the details and try again.");
             }
         });
 
-        Optional<ButtonType> result = dialog.showAndWait();
-        if (result.isEmpty() || result.get() != saveType) {
-            return;
-        }
+        GridPane form = formGrid();
+        form.setPrefWidth(760);
+        form.addRow(0, new Label("Expense"), name);
+        form.addRow(1, new Label("Amount (₹)"), amount);
+        form.addRow(2, new Label("Category"), category);
+        form.addRow(3, new Label("Date"), date);
+        form.addRow(4, new Label("Paid by"), payer);
+        form.addRow(5, new Label("Split"), mode);
+        form.add(toggleAll, 0, 6);
+        form.add(participantBox, 1, 6);
+        form.add(preview, 0, 7, 2, 1);
+        form.add(error, 0, 8, 2, 1);
+        form.add(new HBox(10, save, cancel), 1, 9);
 
-        Map<Integer, Long> shares = compute.get();
-        long cents = Math.round(Money.parse(amount.getText()) * 100);
-        boolean ok = GroupExpenses.save(editing ? existing.id() : null, group.getId(), name.getText().trim(),
-                cents, payer.getValue().getId(), date.getValue().toString(), category.getValue(), shares);
+        VBox box = card(form);
+        box.setMaxWidth(860);
+        content.getChildren().add(box);
 
-        if (ok) {
-            nav.openTrip(group);
-            nav.toast(editing ? "Expense updated" : "Expense saved");
-        } else {
-            message("Could not save expense", "Please check the details and try again.");
+        if (!editing) {
+            javafx.application.Platform.runLater(name::requestFocus);
         }
     }
 }
