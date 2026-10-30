@@ -1,0 +1,21 @@
+﻿Settlr trip report,Goa Trip
+
+EXPENSES
+Date,Name,Category,Amount (INR),Paid by,Split between
+2026-10-30,Taxi,Travel,3500.00,Akhil,4
+2026-10-30,Dinner,Food,1000.00,Stuti,4
+2026-10-30,Hotel,Bills,2000.00,Saiyam,4
+,TOTAL,,6500.00
+
+BALANCES (positive = should receive)
+Member,Paid,Share,Net balance
+Stuti,1000.00,1625.00,-625.00
+Saiyam,2000.00,1625.00,375.00
+Krish,0.00,1625.00,-1625.00
+Akhil,3500.00,1625.00,1875.00
+
+WHO PAYS WHOM
+From,To,Amount (INR)
+Krish,Akhil,1625.00
+Stuti,Akhil,250.00
+Stuti,Saiyam,375.00
