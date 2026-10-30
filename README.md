@@ -54,35 +54,35 @@ Spending overview, budget watch, recent expenses and the monthly spending chart.
 
 <img src="docs/Screenshot%202026-10-30%20at%2010.39.39%20AM.png" alt="Settlr dashboard" width="100%">
 
-### Personal expenses
-Add an expense, search, filter by month, category or date range, edit or delete (with undo) and export to CSV.
+### Personal Expenses
+Add an expense, search, filter by month, category or date range, edit or delete expenses, and export to CSV.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.39.49%20AM.png" alt="Personal expenses" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.39.49%20AM.png" alt="Settlr personal expenses" width="100%">
 
-### Trip detail (Goa Trip)
-Members, shared expenses, trip summary, payer information and a spending breakdown by category.
+### Trip Details — Goa Trip
+Members, shared expenses, trip summary, payer information and spending breakdown by category.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.01%20AM.png" alt="Goa Trip" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.01%20AM.png" alt="Settlr Goa Trip details" width="100%">
 
 ### Settlements
-Member balances, outstanding transfers and completed payments.
+Member balances, outstanding transfers, suggested payments and completed settlements.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.32%20AM.png" alt="Settlements" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.32%20AM.png" alt="Settlr settlements" width="100%">
 
-### Budgets (dark mode)
-Monthly limits, live budget progress and recurring expenses.
+### Budgets — Dark Mode
+Monthly limits, budget progress indicators and recurring expenses.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.49%20AM.png" alt="Budgets in dark mode" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.49%20AM.png" alt="Settlr budgets in dark mode" width="100%">
 
-### Analytics (dark mode)
-Spending by category, pie chart, monthly trend and financial summaries.
+### Analytics — Dark Mode
+Spending by category, pie chart, monthly spending trends and financial summaries.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.41.55%20AM.png" alt="Analytics in dark mode" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.41.55%20AM.png" alt="Settlr analytics in dark mode" width="100%">
 
-### Settings (dark mode)
-Profile, light or dark appearance, local database backup and application information.
+### Settings — Dark Mode
+Profile management, appearance selection, local database backup and application information.
 
-<img src="docs/Screenshot%202026-10-30%20at%2010.42.03%20AM.png" alt="Settings in dark mode" width="100%">
+<img src="docs/Screenshot%202026-10-30%20at%2010.42.03%20AM.png" alt="Settlr settings in dark mode" width="100%">
 
 ---
 
