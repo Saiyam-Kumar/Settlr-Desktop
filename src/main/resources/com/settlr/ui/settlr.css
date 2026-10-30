@@ -30,6 +30,11 @@
     -fx-background-color: -fx-surface;
 }
 
+/* Default text colour. Must stay ABOVE the specific label classes below so they can override it. */
+.label {
+    -fx-text-fill: -fx-ink;
+}
+
 /* Crisp, even text: grayscale smoothing instead of LCD sub-pixel */
 .text {
     -fx-font-smoothing-type: gray;
@@ -269,10 +274,6 @@
 }
 
 /* ---------- Inputs ---------- */
-.label {
-    -fx-text-fill: -fx-ink;
-}
-
 .text-field,
 .text-area {
     -fx-background-color: -fx-field;
